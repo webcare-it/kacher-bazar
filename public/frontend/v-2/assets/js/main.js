@@ -24,6 +24,18 @@ $('.nav-toggle-btn').click(function() {
     $('body').toggleClass('body-overflow');
 });
 
+$('.mobile-side-menu-overlay, .mobile-side-menu-close').click(function() {
+    $('.manu-wrapper').removeClass('menu-visible');
+    $('.mobile-side-menu').removeClass('menu-visible');
+    $('.mobile-side-menu-overlay').removeClass('active');
+    $('body').removeClass('body-overflow');
+});
+
+// Mobile menu subcategory toggle
+$('.mobile-submenu-toggle').click(function() {
+    $(this).closest('.manu-list-item').toggleClass('submenu-open').find('.mobile-submenu').slideToggle(200);
+});
+
  //Filter Item Show
  $(document).on("click",".filter-items-outer .label", function(e) {
     $(this).closest('.filter-items-outer').find(".filter-items").slideToggle();

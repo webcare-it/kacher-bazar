@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use App\Http\View\Composer\HeaderComposer;
 use App\Models\About;
-use App\Models\AddPage;
 use App\Models\Cart;
 use App\Models\Category;
 use App\Models\GeneralSetting;
@@ -65,7 +64,6 @@ class AppServiceProvider extends ServiceProvider
 
         View::composer('*', function ($view){
             $view->with('categories', Category::where('status', 1)->get());
-            $view->with('allPages', AddPage::where('status', 1)->get());
             $view->with('privacy', PrivacyPolicy::first());
             $view->with('terms', TermsCondition::first());
             $view->with('refund', RefundPolicy::first());

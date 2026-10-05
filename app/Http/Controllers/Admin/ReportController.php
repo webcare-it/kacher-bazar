@@ -1054,12 +1054,18 @@ class ReportController extends Controller
             }
 
             $generalSetting = GeneralSetting::first();
+
+            if (!$generalSetting || !$generalSetting->droploo_app_key || !$generalSetting->droploo_app_secret || !$generalSetting->droploo_username) {
+                return redirect()->back()->with('error', 'Droploo API credentials are not configured. Please update them in the settings panel.');
+            }
+
             $appKey = $generalSetting->droploo_app_key;
             $appSecret = $generalSetting->droploo_app_secret;
             $userName = $generalSetting->droploo_username;
-            $apiEndpoint = 'https://backend.droploo.com/api/product/create-order';
+            $apiEndpoint = 'https://nittoz.com/api/v1/dropshippers/legacy/place-order';
 
             $payload = [
+                'type'                  => 'STARTER',
                 'invoice_number'        => $orderDetails->orderId,
                 'customer_name'         => $orderDetails->name,
                 'customer_phone'        => $orderDetails->phone,

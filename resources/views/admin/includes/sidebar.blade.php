@@ -20,16 +20,6 @@
             <li> <a href="{{ route('subcategories.create')}}"><i class="bx bx-right-arrow-alt"></i>Add new</a></li>
         </ul>
     </li>
-    <li>
-        <a class="" href="{{ url('/page/list') }}">
-            <div class="parent-icon">
-                <i class='bx bx-group'></i>
-            </div>
-            <div class="menu-title">
-                Add Page
-            </div>
-        </a>
-    </li>
 {{--    <li>--}}
 {{--        <a class="has-arrow" href="javascript:;">--}}
 {{--            <div class="parent-icon"><i class='bx bx-message-square-edit'></i></div>--}}
@@ -75,17 +65,6 @@
             <li>
                 <a href="{{ route('admin.dropshipping-products.create') }}">
                     <i class="bx bx-right-arrow-alt"></i>Add Dropshipping Product
-                </a>
-            </li>
-
-            <li>
-              <a href="{{ route('admin.page.products.create') }}">
-                  <i class="bx bx-right-arrow-alt"></i>Page Product Add
-              </a>
-            </li>
-            <li>
-                <a href="{{ route('page.products.index') }}">
-                    <i class="bx bx-right-arrow-alt"></i>Page Product Lists
                 </a>
             </li>
 {{--            <li>--}}

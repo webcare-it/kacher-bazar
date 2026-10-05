@@ -141,16 +141,11 @@
                     <li class="header-bottom-nav-item">
                         <a href="{{ url('/shops') }}" class="header-bottom-nav-item-link">Shop</a>
                     </li>
-                    @foreach ($allPages as $page)
+                    @foreach ($categories->take(5) as $category)
                         <li class="header-bottom-nav-item">
-                            <a href="{{ url('/page/products/'. \Illuminate\Support\Str::slug($page->name)) }}" target="_blank" class="header-bottom-nav-item-link">
-                                {{ ucfirst($page?->name) }}
-                            </a>
+                            <a href="{{ url('/products/'.$category->slug) }}" class="header-bottom-nav-item-link">{{ $category->name }}</a>
                         </li>
                     @endforeach
-                    <li class="header-bottom-nav-item">
-                        <a href="{{ url('/return/process') }}" class="header-bottom-nav-item-link">Return Process</a>
-                    </li>
                 </ul>
             </div>
             </div>
@@ -158,30 +153,62 @@
         <!-- /Desktop Bottom Nav -->
 
         <!-- Mobile Side Menu -->
+        <div class="mobile-side-menu-overlay d-lg-none"></div>
         <div class="mobile-side-menu d-lg-none">
-            <ul class="mobile-side-menu-list">
-                <li class="manu-list-item">
-                    <a href="{{ url('/') }}" class="manu-list-item-link">Home</a>
-                </li>
-                <li class="manu-list-item">
-                    <a href="{{ url('/shops') }}" class="manu-list-item-link">Shop</a>
-                </li>
-                @foreach ($allPages as $page)
-                   <li class="manu-list-item">
-                      <a href="{{ url('/page/products/'. \Illuminate\Support\Str::slug($page->name)) }}" target="_blank" class="manu-list-item-link">
-                          {{ ucfirst($page?->name) }}
-                      </a>
-                   </li>
-                @endforeach
-                <li class="manu-list-item">
-                    <a href="{{ url('/return/process') }}" class="manu-list-item-link">Return Process</a>
-                </li>
-                @foreach ($categories as $category)
+            <div class="mobile-side-menu-header">
+                <a href="{{ url('/') }}" class="mobile-side-menu-logo">
+                    <img src="{{ asset('setting/'.$setting->logo) }}" alt="logo">
+                </a>
+                <button type="button" class="mobile-side-menu-close" aria-label="Close menu">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="mobile-side-menu-body">
+                <ul class="mobile-side-menu-list">
                     <li class="manu-list-item">
-                        <a href="{{ url('/products/'.$category->slug) }}" class="manu-list-item-link">{{ $category->name }}</a>
+                        <a href="{{ url('/') }}" class="manu-list-item-link">
+                            <span class="manu-list-item-icon"><i class="fas fa-home"></i></span>
+                            Home
+                        </a>
                     </li>
-                @endforeach
-            </ul>
+                    <li class="manu-list-item">
+                        <a href="{{ url('/shops') }}" class="manu-list-item-link">
+                            <span class="manu-list-item-icon"><i class="fas fa-store"></i></span>
+                            Shop
+                        </a>
+                    </li>
+                </ul>
+
+                <h6 class="mobile-side-menu-title">Categories</h6>
+                <ul class="mobile-side-menu-list">
+                    @foreach ($categories as $category)
+                        <li class="manu-list-item">
+                            <div class="manu-list-item-row">
+                                <a href="{{ url('/products/'.$category->slug) }}" class="manu-list-item-link">
+                                    <span class="manu-list-item-icon">
+                                        <img src="{{ asset('/category/'.$category->image) }}" alt="{{ $category->name }}">
+                                    </span>
+                                    {{ $category->name }}
+                                </a>
+                                @if ($category->subcategories->count())
+                                    <button type="button" class="mobile-submenu-toggle" aria-label="Show subcategories">
+                                        <i class="fas fa-chevron-down"></i>
+                                    </button>
+                                @endif
+                            </div>
+                            @if ($category->subcategories->count())
+                                <ul class="mobile-submenu">
+                                    @foreach ($category->subcategories as $subcategory)
+                                        <li>
+                                            <a href="{{ url('/subcategory/products/'.$subcategory->slug) }}">{{ $subcategory->name }}</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @endif
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
         </div>
         <!-- /Mobile Side Menu -->
 

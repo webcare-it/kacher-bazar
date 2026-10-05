@@ -271,4 +271,5 @@ Route::group(['middleware' => 'isAdmin'], function(){
     //droploo Product API......
     Route::get('/droploo-products', [\App\Http\Controllers\Admin\ProductController::class, 'droplooProductList']);
     Route::get('/add-droploo-product/{id}', [\App\Http\Controllers\Admin\ProductController::class, 'droplooProductAdd']);
+    Route::post('/droploo-products/import/{id}', [\App\Http\Controllers\Admin\ProductController::class, 'droplooProductImport']);
 });
